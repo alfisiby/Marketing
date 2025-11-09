@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Growth & Content Marketing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1d1d1f;
+            background: #fbfbfd;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero Section with Parallax */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, #000000 0%, #1a1a1a 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 100, 100, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(100, 210, 255, 0.15) 0%, transparent 50%);
+            animation: gradientShift 20s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
+            50% { opacity: 0.8; transform: scale(1.1) rotate(5deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 40px 0 60px;
+        }
+
+        .greeting {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 600;
+            color: #f5f5f7;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .wave {
+            display: inline-block;
+            animation: wave 1.5s ease-in-out infinite;
+            transform-origin: 70% 70%;
+            font-size: clamp(2rem, 5vw, 3rem);
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            10%, 30% { transform: rotate(14deg); }
+            20% { transform: rotate(-8deg); }
+            40% { transform: rotate(-4deg); }
+            50% { transform: rotate(10deg); }
+            60% { transform: rotate(0deg); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 6vw, 5.5rem);
+            font-weight: 700;
+            color: #f5f5f7;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.2s forwards;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            color: #a1a1a6;
+            margin-bottom: 40px;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.4s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 32px;
+            max-width: 700px;
+            margin: 0 auto 48px;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: clamp(2rem, 4vw, 4rem);
+            font-weight: 700;
+            display: block;
+            background: linear-gradient(135deg, #f5f5f7 0%, #a1a1a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .stat-label {
+            font-size: clamp(0.75rem, 2vw, 0.875rem);
+            color: #86868b;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: #f5f5f7;
+            color: #1d1d1f;
+            text-decoration: none;
+            border-radius: 980px;
+            font-weight: 500;
+            font-size: clamp(0.9375rem, 2vw, 1rem);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.8s forwards;
+        }
+
+        .cta-button:hover {
+            background: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Section Styles */
+        section {
+            padding: clamp(80px, 12vw, 140px) 0;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-eyebrow {
+            font-size: 1.125rem;
+            color: #86868b;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+        }
+
+        .section-subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: #6e6e73;
+            max-width: 680px;
+            margin: 0 auto;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        /* Case Study Cards */
+        .case-study {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: clamp(40px, 6vw, 64px);
+            margin-bottom: 40px;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .case-study:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+        }
+
+        .case-study-header {
+            margin-bottom: 40px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .case-study-title {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: #1d1d1f;
+            margin-bottom: 16px;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+        }
+
+        .case-meta {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+            font-size: 0.9375rem;
+            color: #6e6e73;
+            font-weight: 500;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .case-section {
+            margin-bottom: 48px;
+        }
+
+        .case-section h3 {
+            font-size: 1.5rem;
+            color: #1d1d1f;
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .case-section p {
+            font-size: 1.0625rem;
+            line-height: 1.7;
+            color: #1d1d1f;
+            font-weight: 400;
+        }
+
+        .case-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .case-section li {
+            font-size: 1.0625rem;
+            line-height: 1.7;
+            color: #1d1d1f;
+            margin-bottom: 16px;
+            padding-left: 28px;
+            position: relative;
+        }
+
+        .case-section li:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 6px;
+            height: 6px;
+            background: #1d1d1f;
+            border-radius: 50%;
+        }
+
+        .case-section li strong {
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+
+        /* Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin: 48px 0;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #1d1d1f 0%, #2d2d2f 100%);
+            padding: 40px 32px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .metric-value {
+            font-size: 3rem;
+            font-weight: 700;
+            display: block;
+            background: linear-gradient(135deg, #f5f5f7 0%, #a1a1a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .metric-label {
+            font-size: 0.9375rem;
+            color: #a1a1a6;
+            font-weight: 500;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(255, 204, 0, 0.08) 0%, rgba(255, 149, 0, 0.08) 100%);
+            border-left: 3px solid #ff9500;
+            padding: 32px;
+            border-radius: 16px;
+            margin: 40px 0;
+        }
+
+        .highlight-box strong {
+            color: #1d1d1f;
+            font-weight: 600;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            font-size: 1.0625rem;
+            line-height: 1.7;
+        }
+
+        /* Key Learnings */
+        .learnings {
+            background: #f5f5f7;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+        }
+
+        .learnings h4 {
+            font-size: 1.375rem;
+            color: #1d1d1f;
+            margin-bottom: 24px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .learnings ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .learnings li {
+            padding-left: 32px;
+            position: relative;
+            margin-bottom: 16px;
+            font-size: 1.0625rem;
+            line-height: 1.7;
+            color: #1d1d1f;
+        }
+
+        .learnings li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #34c759;
+            font-weight: 600;
+            font-size: 1.25rem;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .skill-category {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .skill-category h3 {
+            font-size: 1.375rem;
+            color: #1d1d1f;
+            margin-bottom: 24px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            background: #f5f5f7;
+            color: #1d1d1f;
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .skill-tag:hover {
+            background: #e8e8ed;
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content p {
+            font-size: 1.1875rem;
+            line-height: 1.7;
+            color: #1d1d1f;
+            margin-bottom: 28px;
+            font-weight: 400;
+        }
+
+        /* Footer */
+        footer {
+            background: #1d1d1f;
+            color: #f5f5f7;
+            text-align: center;
+            padding: 60px 24px;
+            margin-top: 100px;
+        }
+
+        footer p {
+            font-size: 1.125rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        footer a {
+            color: #2997ff;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        footer a:hover {
+            color: #0077ed;
+        }
+
+        footer .copyright {
+            margin-top: 40px;
+            opacity: 0.5;
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 100svh;
+                padding: 0 16px;
+            }
+
+            .hero-content {
+                padding: 32px 0 48px;
+            }
+
+            .greeting {
+                margin-bottom: 24px;
+                gap: 8px;
+            }
+
+            .hero h1 {
+                margin-bottom: 16px;
+            }
+
+            .hero .subtitle {
+                margin-bottom: 32px;
+            }
+
+            .stats-grid {
+                gap: 24px;
+                margin-bottom: 40px;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cta-button {
+                padding: 12px 24px;
+            }
+
+            .stats-grid {
+                gap: 32px;
+            }
+
+            .case-study {
+                padding: 32px 24px;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .section-header {
+                margin-bottom: 50px;
+            }
+        }
+
+        /* Smooth Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            opacity: 0;
+            animation: fadeIn 1s ease 1s forwards;
+        }
+
+        .scroll-indicator::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 2px;
+            animation: scrollDown 2s ease infinite;
+        }
+
+        @keyframes scrollDown {
+            0% { opacity: 0; transform: translate(-50%, 0); }
+            40% { opacity: 1; }
+            80% { opacity: 0; }
+            100% { opacity: 0; transform: translate(-50%, 12px); }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="container">
+                <div class="greeting">
+                    <span>Hey, it's Alfi</span>
+                    <span class="wave">👋</span>
+                </div>
+                <h1>Content that converts.<br>Growth that scales.</h1>
+                <p class="subtitle">AI Content Creator · Growth Marketer · Product Marketing</p>
+                
+                <div class="stats-grid">
+                    <div class="stat">
+                        <span class="stat-number">1M+</span>
+                        <span class="stat-label">Total Views</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">599K</span>
+                        <span class="stat-label">Top Video</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">400</span>
+                        <span class="stat-label">Users · 45 Days</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">360+</span>
+                        <span class="stat-label">Videos Created</span>
+                    </div>
+                </div>
+
+                <a href="https://drive.google.com/drive/folders/11l4gtVn99ktsvwnjiLAHDooRTMeHdU1B?usp=sharing" class="cta-button" target="_blank">
+                    <span>View All Work</span>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M6 12L10 8L6 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <!-- Case Studies Section -->
+    <section id="work">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-eyebrow">Case Studies</div>
+                <h2 class="section-title">Real results.<br>Real impact.</h2>
+                <p class="section-subtitle">From zero to viral. Here's how I've driven growth through strategic content and data-driven marketing.</p>
+            </div>
+
+            <!-- Case Study 1: Heywork -->
+            <div class="case-study">
+                <div class="case-study-header">
+                    <h3 class="case-study-title">Heywork: 0 to 400 Users in 45 Days</h3>
+                    <div class="case-meta">
+                        <span class="meta-item">⏱ 1.5 months</span>
+                        <span class="meta-item">💰 ₹500 budget</span>
+                        <span class="meta-item">🎯 Product Marketing</span>
+                    </div>
+                </div>
+
+                <div class="case-section">
+                    <h3>🎯 The Challenge</h3>
+                    <p>Launch an early-stage blue-collar job platform in India's competitive market with zero marketing budget. Build a two-sided marketplace connecting workers with employers while competing against established players like Apna and WorkIndia.</p>
+                </div>
+
+                <div class="case-section">
+                    <h3>💡 My Strategy</h3>
+                    <ul>
+                        <li><strong>Positioning:</strong> Conducted 300+ interviews to identify key pain points - trust, payment delays, job quality</li>
+                        <li><strong>Content-Led GTM:</strong> Developed organic content strategy targeting blue-collar workers on Instagram</li>
+                        <li><strong>Viral Storytelling:</strong> Created relatable, emotional narratives showing real workers finding better opportunities</li>
+                        <li><strong>B2B Outreach:</strong> Simultaneously pitched enterprise clients (Swiggy, Zepto, Delhivery) for job postings</li>
+                    </ul>
+                </div>
+
+                <div class="case-section">
+                    <h3>🚀 Execution</h3>
+                    <p>Created a viral video that resonated deeply with the target audience. The video showcased authentic stories of blue-collar workers, positioned Heywork as the trustworthy solution, and included a clear call-to-action. Used AI tools to produce high-quality content quickly, optimized for Instagram Reels algorithm.</p>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <span class="metric-value">400</span>
+                        <span class="metric-label">Total Users Acquired</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">300</span>
+                        <span class="metric-label">From Single Video</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">10K+</span>
+                        <span class="metric-label">Video Views</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">2.5%</span>
+                        <span class="metric-label">Conversion Rate</span>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <strong>Key Result:</strong> 62% of total user acquisition came from a single viral video, proving strong product-market fit and messaging resonance. Achieved ₹10 CAC through small paid experiment (₹500 → 50 users).
+                </div>
+
+                <div class="learnings">
+                    <h4>🎓 Key Learnings</h4>
+                    <ul>
+                        <li>Emotional storytelling beats feature lists for consumer products</li>
+                        <li>Platform algorithms favor authentic, relatable content over polished brand videos</li>
+                        <li>Content that shows transformation drives higher conversion than awareness content</li>
+                        <li>Starting B2B supply-side earlier would have accelerated growth further</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Case Study 2: Agency Viral Content -->
+            <div class="case-study">
+                <div class="case-study-header">
+                    <h3 class="case-study-title">BConClub: 1M+ Views Through Viral Content</h3>
+                    <div class="case-meta">
+                        <span class="meta-item">⏱ 18 months</span>
+                        <span class="meta-item">🎬 360+ videos</span>
+                        <span class="meta-item">📈 Content Marketing</span>
+                    </div>
+                </div>
+
+                <div class="case-section">
+                    <h3>🎯 The Challenge</h3>
+                    <p>Build brand awareness and credibility for a marketing agency transitioning from traditional motion graphics to AI-powered content creation. Stand out in a crowded market and attract enterprise clients through demonstrated expertise.</p>
+                </div>
+
+                <div class="case-section">
+                    <h3>💡 My Approach</h3>
+                    <ul>
+                        <li><strong>Volume + Quality:</strong> Maintained consistent output of 20-30 videos per month while optimizing for viral performance</li>
+                        <li><strong>Platform Mastery:</strong> Deep-dived into Instagram Reels algorithm - hooks, pacing, music, trends</li>
+                        <li><strong>AI Innovation:</strong> Pioneered agency's transition to AI tools (Nano banana, Veo) to increase production speed 3-5x</li>
+                        <li><strong>Diverse Portfolio:</strong> Created content across industries - FMCG, automotive, lifestyle, food & beverage</li>
+                    </ul>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <span class="metric-value">1M+</span>
+                        <span class="metric-label">Cumulative Views</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">599K</span>
+                        <span class="metric-label">Top Video Views</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">120K</span>
+                        <span class="metric-label">Second Top Video</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">360+</span>
+                        <span class="metric-label">Total Videos</span>
+                    </div>
+                </div>
+
+                <div class="case-section">
+                    <h3>🏆 Notable Campaigns</h3>
+                    <ul>
+                        <li><strong>Viral Hit #1:</strong> 599K views - Brand storytelling video that showcased product in unexpected, engaging way</li>
+                        <li><strong>Parachute Campaign:</strong> 120K views - Transformed commodity product (coconut oil) into aspirational lifestyle content</li>
+                        <li><strong>Consistent Performers:</strong> Multiple videos achieving 10K-15K views with high engagement rates</li>
+                        <li><strong>Product Showcases:</strong> Created content for automotive (Thar), beverages (Campa Cola), consumer goods</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box">
+                    <strong>Impact:</strong> Built agency's social presence from scratch to 1M+ views, establishing credibility that attracted enterprise clients. Proven track record of creating viral content consistently, not just one-off hits.
+                </div>
+
+                <div class="learnings">
+                    <h4>🎓 What Makes Content Go Viral</h4>
+                    <ul>
+                        <li>First 3 seconds are everything - must stop the scroll immediately</li>
+                        <li>Authenticity > Production value - real stories beat overly polished content</li>
+                        <li>Platform-specific optimization crucial - what works on Reels won't work on YouTube</li>
+                        <li>Consistent posting builds algorithm favor - can't expect virality from sporadic posts</li>
+                        <li>AI tools enable quality at scale - key competitive advantage going forward</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Case Study 3: Content Production at Scale -->
+            <div class="case-study">
+                <div class="case-study-header">
+                    <h3 class="case-study-title">360+ Videos: Quality at Scale</h3>
+                    <div class="case-meta">
+                        <span class="meta-item">⏱ 18 months</span>
+                        <span class="meta-item">📊 20-30/month</span>
+                        <span class="meta-item">🚀 Growth Marketing</span>
+                    </div>
+                </div>
+
+                <div class="case-section">
+                    <h3>🎯 The Challenge</h3>
+                    <p>Maintain consistent high-quality content output while experimenting with formats, styles, and platforms. Scale production without sacrificing creative quality or strategic thinking.</p>
+                </div>
+
+                <div class="case-section">
+                    <h3>⚙️ My Production System</h3>
+                    <ul>
+                        <li><strong>AI-Powered Workflows:</strong> Integrated AI tools (Nano banana for visuals, Claude for scripts, Veo and Kling for video) to accelerate production 3-5x</li>
+                        <li><strong>Content Frameworks:</strong> Developed repeatable frameworks for different content types (product showcases, brand stories, educational content)</li>
+                        <li><strong>Batch Production:</strong> Organized production in batches - ideation week, production week, publishing throughout month</li>
+                        <li><strong>Performance Analysis:</strong> Weekly reviews of top/bottom performers to identify patterns and continuously improve</li>
+                    </ul>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <span class="metric-value">360+</span>
+                        <span class="metric-label">Videos Produced</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">20-30</span>
+                        <span class="metric-label">Videos per Month</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">10+</span>
+                        <span class="metric-label">Brands Served</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-value">3-5x</span>
+                        <span class="metric-label">Speed Increase via AI</span>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <strong>Key Innovation:</strong> Pioneered agency's AI transformation, enabling them to compete with larger agencies on speed and scale while maintaining creative quality. This became a key differentiator in winning new business.
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section style="background: #ffffff;">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-eyebrow">Expertise</div>
+                <h2 class="section-title">Tools & skills that<br>drive results.</h2>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>🚀 Growth & Marketing</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">User Acquisition</span>
+                        <span class="skill-tag">Viral Marketing</span>
+                        <span class="skill-tag">Social Media Strategy</span>
+                        <span class="skill-tag">Content Strategy</span>
+                        <span class="skill-tag">B2B Outreach</span>
+                        <span class="skill-tag">Organic Growth</span>
+                        <span class="skill-tag">Community Building</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>🎬 Content Creation</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">AI Content Tools</span>
+                        <span class="skill-tag">Midjourney</span>
+                        <span class="skill-tag">Veo</span>
+                        <span class="skill-tag">Nano Banana</span>
+                        <span class="skill-tag">Video Editing</span>
+                        <span class="skill-tag">Premiere Pro</span>
+                        <span class="skill-tag">After Effects</span>
+                        <span class="skill-tag">Copywriting</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>📊 Product & Analytics</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Product Positioning</span>
+                        <span class="skill-tag">User Research</span>
+                        <span class="skill-tag">UI/UX Design</span>
+                        <span class="skill-tag">Figma</span>
+                        <span class="skill-tag">Growth Metrics</span>
+                        <span class="skill-tag">A/B Testing</span>
+                        <span class="skill-tag">GTM Strategy</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>💻 Technical</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">B.Tech CS</span>
+                        <span class="skill-tag">Product Thinking</span>
+                        <span class="skill-tag">Platform Algorithms</span>
+                        <span class="skill-tag">AI/ML Basics</span>
+                        <span class="skill-tag">Analytics Tools</span>
+                        <span class="skill-tag">Prompt Engineering</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section>
+        <div class="container">
+            <div class="section-header">
+                <div class="section-eyebrow">About</div>
+                <h2 class="section-title">Creating content that<br>actually matters.</h2>
+            </div>
+            <div class="about-content">
+                <p>
+                    I'm a growth marketer and AI content creator who believes in the power of storytelling backed by data. With a B.Tech in Computer Science and 2+ years creating content that drives real business results, I bridge the gap between creative and analytical.
+                </p>
+                <p>
+                    My approach? Create viral content at scale. I've produced 360+ videos generating over 1M views, including viral hits of 599K and 120K views. But more importantly, I create content that converts—like the 10K-view video that drove 300 user signups.
+                </p>
+                <p>
+                    Currently exploring opportunities in Growth Marketing, Content Marketing, and Product Marketing roles where I can bring AI-powered content creation and data-driven strategy together.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Its Time To Grow.</p>
+            <p>
+                <a href="mailto:alfi.siby.work@gmail.com">alfi.siby.work@gmail.com</a> · 
+                <a href="https://www.linkedin.com/in/alfi-siby/" target="_blank">LinkedIn</a> · 
+                <a href="tel:+916235186956">+91 6235 186956</a>
+            </p>
+            <p class="copyright">© 2025 All Rights Reserved</p>
+        </div>
+    </footer>
+
+</body>
+</html>
