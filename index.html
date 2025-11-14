@@ -168,23 +168,123 @@
         .cta-button {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 14px 28px;
-            background: #f5f5f7;
-            color: #1d1d1f;
+            gap: 10px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, #2997ff 0%, #0077ed 100%);
+            color: #ffffff;
             text-decoration: none;
-            border-radius: 980px;
-            font-weight: 500;
-            font-size: clamp(0.9375rem, 2vw, 1rem);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: clamp(1rem, 2vw, 1.125rem);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             opacity: 0;
-            animation: fadeInUp 1s ease 0.8s forwards;
+            animation: fadeInUp 1s ease 0.8s forwards, buttonPop 2.5s ease-in-out 2s infinite;
+            position: relative;
+            box-shadow: 0 8px 32px rgba(41, 151, 255, 0.4);
+        }
+
+        /* Notification Badge */
+        .cta-button::after {
+            content: '6+';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: linear-gradient(135deg, #ff3b30 0%, #ff6b6b 100%);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(255, 59, 48, 0.4), 0 0 0 3px #000;
+            animation: badgePop 2.5s ease-in-out 2s infinite;
+        }
+
+        /* Ripple Ring Effect */
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            border: 2px solid rgba(41, 151, 255, 0.6);
+            border-radius: 50px;
+            animation: ripple 2.5s ease-in-out 2s infinite;
         }
 
         .cta-button:hover {
-            background: #ffffff;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #0077ed 0%, #005bb5 100%);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 48px rgba(41, 151, 255, 0.6);
+            animation: none;
+        }
+
+        .cta-button:hover::before {
+            animation: none;
+            opacity: 0;
+        }
+
+        .cta-button:hover::after {
+            animation: none;
+        }
+
+        /* Button Pop Animation */
+        @keyframes buttonPop {
+            0%, 100% {
+                transform: scale(1);
+            }
+            5% {
+                transform: scale(1.08);
+            }
+            10% {
+                transform: scale(0.98);
+            }
+            15% {
+                transform: scale(1.04);
+            }
+            20% {
+                transform: scale(1);
+            }
+        }
+
+        /* Badge Pop Animation */
+        @keyframes badgePop {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+            }
+            5% {
+                transform: scale(1.2) rotate(-10deg);
+            }
+            10% {
+                transform: scale(0.9) rotate(10deg);
+            }
+            15% {
+                transform: scale(1.1) rotate(-5deg);
+            }
+            20% {
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        /* Ripple Effect */
+        @keyframes ripple {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.8;
+            }
+            10% {
+                transform: translate(-50%, -50%) scale(1.3);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.3);
+                opacity: 0;
+            }
         }
 
         /* Section Styles */
@@ -225,34 +325,95 @@
             font-weight: 400;
         }
 
-        /* Case Study Cards */
-        .case-study {
-            background: #ffffff;
-            border-radius: 24px;
-            padding: clamp(40px, 6vw, 64px);
-            margin-bottom: 40px;
+        /* Case Study Bento Grid */
+        .case-study-wrapper {
+            margin-bottom: 120px;
+        }
+
+        .case-study-wrapper:last-of-type {
+            margin-bottom: 0;
+        }
+
+        /* Case Study Separator */
+        .case-study-separator {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin: 100px 0 60px;
+        }
+
+        .separator-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.1) 50%, transparent 100%);
+        }
+
+        .separator-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #86868b;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            white-space: nowrap;
+            padding: 8px 20px;
+            background: #f5f5f7;
+            border-radius: 20px;
             border: 1px solid rgba(0, 0, 0, 0.06);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .case-study:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-        }
-
-        .case-study-header {
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
             margin-bottom: 40px;
-            padding-bottom: 32px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
         }
 
-        .case-study-title {
-            font-size: clamp(1.75rem, 4vw, 2.5rem);
+        .bento-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 32px;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .bento-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Bento Card Sizes */
+        .bento-hero {
+            grid-column: span 4;
+            background: linear-gradient(135deg, #1d1d1f 0%, #2d2d2f 100%);
+            padding: clamp(40px, 6vw, 56px);
+        }
+
+        .bento-large {
+            grid-column: span 2;
+        }
+
+        .bento-medium {
+            grid-column: span 2;
+        }
+
+        .bento-small {
+            grid-column: span 1;
+        }
+
+        .bento-wide {
+            grid-column: span 4;
+        }
+
+        /* Hero Card Styles */
+        .bento-hero .case-study-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 700;
-            color: #1d1d1f;
-            margin-bottom: 16px;
-            line-height: 1.15;
-            letter-spacing: -0.02em;
+            color: #f5f5f7;
+            margin-bottom: 20px;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
         }
 
         .case-meta {
@@ -260,7 +421,7 @@
             gap: 24px;
             flex-wrap: wrap;
             font-size: 0.9375rem;
-            color: #6e6e73;
+            color: #a1a1a6;
             font-weight: 500;
         }
 
@@ -270,77 +431,70 @@
             gap: 6px;
         }
 
-        .case-section {
-            margin-bottom: 48px;
-        }
-
-        .case-section h3 {
+        /* Card Content Styles */
+        .bento-card h3 {
             font-size: 1.5rem;
             color: #1d1d1f;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             font-weight: 600;
             letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .case-section p {
-            font-size: 1.0625rem;
+        .bento-card p {
+            font-size: 1rem;
             line-height: 1.7;
-            color: #1d1d1f;
+            color: #6e6e73;
             font-weight: 400;
         }
 
-        .case-section ul {
+        .bento-card ul {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
 
-        .case-section li {
-            font-size: 1.0625rem;
-            line-height: 1.7;
+        .bento-card li {
+            font-size: 0.9375rem;
+            line-height: 1.6;
             color: #1d1d1f;
-            margin-bottom: 16px;
-            padding-left: 28px;
+            margin-bottom: 12px;
+            padding-left: 24px;
             position: relative;
         }
 
-        .case-section li:before {
+        .bento-card li:before {
             content: '';
             position: absolute;
             left: 0;
-            top: 10px;
-            width: 6px;
-            height: 6px;
+            top: 8px;
+            width: 5px;
+            height: 5px;
             background: #1d1d1f;
             border-radius: 50%;
         }
 
-        .case-section li strong {
+        .bento-card li strong {
             font-weight: 600;
             color: #1d1d1f;
         }
 
-        /* Metrics Grid */
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 24px;
-            margin: 48px 0;
-        }
-
-        .metric-card {
+        /* Metric Card Styles */
+        .metric-bento {
             background: linear-gradient(135deg, #1d1d1f 0%, #2d2d2f 100%);
-            padding: 40px 32px;
-            border-radius: 20px;
             text-align: center;
-            transition: all 0.3s ease;
+            justify-content: center;
+            padding: 40px 24px;
         }
 
-        .metric-card:hover {
-            transform: translateY(-4px);
+        .metric-bento:hover {
+            transform: translateY(-4px) scale(1.02);
         }
 
         .metric-value {
-            font-size: 3rem;
+            font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 700;
             display: block;
             background: linear-gradient(135deg, #f5f5f7 0%, #a1a1a6 100%);
@@ -352,68 +506,43 @@
         }
 
         .metric-label {
-            font-size: 0.9375rem;
+            font-size: 0.875rem;
             color: #a1a1a6;
             font-weight: 500;
+            line-height: 1.4;
         }
 
-        /* Highlight Box */
-        .highlight-box {
+        /* Highlight Card */
+        .bento-highlight {
             background: linear-gradient(135deg, rgba(255, 204, 0, 0.08) 0%, rgba(255, 149, 0, 0.08) 100%);
-            border-left: 3px solid #ff9500;
-            padding: 32px;
-            border-radius: 16px;
-            margin: 40px 0;
+            border-left: 4px solid #ff9500;
         }
 
-        .highlight-box strong {
+        .bento-highlight strong {
             color: #1d1d1f;
             font-weight: 600;
         }
 
-        .highlight-box p {
-            margin: 0;
-            font-size: 1.0625rem;
-            line-height: 1.7;
-        }
-
-        /* Key Learnings */
-        .learnings {
+        /* Learnings Card */
+        .bento-learnings {
             background: #f5f5f7;
-            padding: 40px;
-            border-radius: 20px;
-            margin: 40px 0;
         }
 
-        .learnings h4 {
-            font-size: 1.375rem;
+        .bento-learnings h4 {
+            font-size: 1.25rem;
             color: #1d1d1f;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             font-weight: 600;
-            letter-spacing: -0.01em;
         }
 
-        .learnings ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .learnings li {
-            padding-left: 32px;
-            position: relative;
-            margin-bottom: 16px;
-            font-size: 1.0625rem;
-            line-height: 1.7;
-            color: #1d1d1f;
-        }
-
-        .learnings li:before {
+        .bento-learnings li:before {
             content: '✓';
             position: absolute;
             left: 0;
             color: #34c759;
             font-weight: 600;
-            font-size: 1.25rem;
+            font-size: 1.125rem;
+            top: 0;
         }
 
         /* Skills Section */
@@ -463,6 +592,129 @@
 
         .skill-tag:hover {
             background: #e8e8ed;
+        }
+
+        /* Clients Section */
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 60px;
+        }
+
+        .client-card {
+            background: #ffffff;
+            padding: 32px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .client-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .client-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #E1306C, #FD1D1D, #F56040, #F77737, #FCAF45, #FFDC80);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .client-card:hover::before {
+            opacity: 1;
+        }
+
+        .client-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .instagram-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .instagram-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        .client-logo {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .client-handle {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            letter-spacing: -0.01em;
+        }
+
+        .client-work-type {
+            display: inline-block;
+            background: #f5f5f7;
+            color: #6e6e73;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .client-description {
+            font-size: 0.9375rem;
+            color: #6e6e73;
+            line-height: 1.6;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .client-card:hover .client-description {
+            opacity: 1;
+            max-height: 100px;
+            margin-top: 12px;
+        }
+
+        .client-arrow {
+            position: absolute;
+            bottom: 24px;
+            right: 24px;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+            color: #2997ff;
+        }
+
+        .client-card:hover .client-arrow {
+            opacity: 1;
+            transform: translateX(0);
         }
 
         /* About Section */
@@ -562,12 +814,89 @@
                 grid-template-columns: 1fr;
             }
 
+            .clients-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .client-card {
+                padding: 24px;
+            }
+
+            .client-description {
+                opacity: 1;
+                max-height: 100px;
+                margin-top: 12px;
+            }
+
+            .client-arrow {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            .bento-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .bento-hero,
+            .bento-large,
+            .bento-medium,
+            .bento-small,
+            .bento-wide {
+                grid-column: span 1;
+            }
+
+            .bento-card {
+                padding: 24px;
+            }
+
+            .metric-bento {
+                padding: 32px 20px;
+            }
+
+            .case-study-separator {
+                margin: 60px 0 40px;
+            }
+
+            .separator-label {
+                font-size: 0.75rem;
+                padding: 6px 16px;
+            }
+
             section {
                 padding: 60px 0;
             }
 
             .section-header {
                 margin-bottom: 50px;
+            }
+        }
+
+        /* Tablet responsive for bento grid */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .bento-hero {
+                grid-column: span 2;
+            }
+
+            .bento-large {
+                grid-column: span 2;
+            }
+
+            .bento-medium {
+                grid-column: span 1;
+            }
+
+            .bento-small {
+                grid-column: span 1;
+            }
+
+            .bento-wide {
+                grid-column: span 2;
             }
         }
 
@@ -653,6 +982,109 @@
         <div class="scroll-indicator"></div>
     </section>
 
+    <!-- Clients Section -->
+    <section style="background: #f5f5f7;">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-eyebrow">Trusted By</div>
+                <h2 class="section-title">Brands I've<br>worked with.</h2>
+                <p class="section-subtitle">Creating viral content and driving growth for leading brands across industries.</p>
+            </div>
+
+            <div class="clients-grid">
+                <!-- Client 1: BirdBox -->
+                <a href="https://www.instagram.com/birdbox.nyc/?hl=en" target="_blank" class="client-card">
+                    <div class="client-header">
+                        <img src="image 1.png" alt="BirdBox" class="client-logo">
+                        <span class="client-handle">@birdbox.nyc</span>
+                    </div>
+                    <span class="client-work-type">Content Creation</span>
+                    <p class="client-description">Developed engaging social media content strategy and brand storytelling.</p>
+                    <div class="client-arrow">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Client 2: BconClub -->
+                <a href="https://www.instagram.com/bconclub/?hl=en" target="_blank" class="client-card">
+                    <div class="client-header">
+                        <img src="image 2.png" alt="BconClub" class="client-logo">
+                        <span class="client-handle">@bconclub</span>
+                    </div>
+                    <span class="client-work-type">Video Production</span>
+                    <p class="client-description">Created 360+ viral videos generating 1M+ views through AI-powered content.</p>
+                    <div class="client-arrow">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Client 3: Malluflix -->
+                <a href="https://www.instagram.com/malluflix_official/" target="_blank" class="client-card">
+                    <div class="client-header">
+                        <img src="image 6.jpg" alt="Malluflix" class="client-logo">
+                        <span class="client-handle">@malluflix_official</span>
+                    </div>
+                    <span class="client-work-type">Content Marketing</span>
+                    <p class="client-description">Built engaging content strategy and amplified social media presence.</p>
+                    <div class="client-arrow">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Client 4: 11pointclub -->
+                <a href="https://www.instagram.com/11pointclub/?hl=en" target="_blank" class="client-card">
+                    <div class="client-header">
+                        <img src="image 3.png" alt="11pointclub" class="client-logo">
+                        <span class="client-handle">@11pointclub</span>
+                    </div>
+                    <span class="client-work-type">Brand Marketing</span>
+                    <p class="client-description">Built brand presence through strategic content and community engagement.</p>
+                    <div class="client-arrow">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Client 5: Heywork -->
+                <a href="https://www.instagram.com/heywork.in/?hl=en" target="_blank" class="client-card">
+                    <div class="client-header">
+                        <img src="image 4.png" alt="Heywork" class="client-logo">
+                        <span class="client-handle">@heywork.in</span>
+                    </div>
+                    <span class="client-work-type">Product Marketing</span>
+                    <p class="client-description">Acquired 400 users in 45 days through viral content and product positioning.</p>
+                    <div class="client-arrow">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </a>
+
+                <!-- Client 6: Windchasers -->
+                <a href="https://www.instagram.com/windchasersblr/?hl=en" target="_blank" class="client-card">
+                    <div class="client-header">
+                        <img src="image 5.png" alt="Windchasers" class="client-logo">
+                        <span class="client-handle">@windchasersblr</span>
+                    </div>
+                    <span class="client-work-type">Social Media Strategy</span>
+                    <p class="client-description">Developed comprehensive social media strategy and content framework.</p>
+                    <div class="client-arrow">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Case Studies Section -->
     <section id="work">
         <div class="container">
@@ -662,189 +1094,237 @@
                 <p class="section-subtitle">From zero to viral. Here's how I've driven growth through strategic content and data-driven marketing.</p>
             </div>
 
-            <!-- Case Study 1: Heywork -->
-            <div class="case-study">
-                <div class="case-study-header">
-                    <h3 class="case-study-title">Heywork: 0 to 400 Users in 45 Days</h3>
-                    <div class="case-meta">
-                        <span class="meta-item">⏱ 1.5 months</span>
-                        <span class="meta-item">💰 ₹500 budget</span>
-                        <span class="meta-item">🎯 Product Marketing</span>
+            <!-- Separator -->
+            <div class="case-study-separator">
+                <div class="separator-line"></div>
+                <div class="separator-label">Case Study 01</div>
+                <div class="separator-line"></div>
+            </div>
+
+            <!-- Case Study 1: Heywork - Bento Style -->
+            <div class="case-study-wrapper">
+                <div class="bento-grid">
+                    <!-- Hero Card -->
+                    <div class="bento-card bento-hero">
+                        <h3 class="case-study-title">Heywork: 0 to 400 Users in 45 Days</h3>
+                        <div class="case-meta">
+                            <span class="meta-item">⏱ 1.5 months</span>
+                            <span class="meta-item">💰 ₹500 budget</span>
+                            <span class="meta-item">🎯 Product Marketing</span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="case-section">
-                    <h3>🎯 The Challenge</h3>
-                    <p>Launch an early-stage blue-collar job platform in India's competitive market with zero marketing budget. Build a two-sided marketplace connecting workers with employers while competing against established players like Apna and WorkIndia.</p>
-                </div>
+                    <!-- Challenge Card -->
+                    <div class="bento-card bento-large">
+                        <h3>🎯 The Challenge</h3>
+                        <p>Launch an early-stage blue-collar job platform in India's competitive market with zero marketing budget. Build a two-sided marketplace connecting workers with employers while competing against established players like Apna and WorkIndia.</p>
+                    </div>
 
-                <div class="case-section">
-                    <h3>💡 My Strategy</h3>
-                    <ul>
-                        <li><strong>Positioning:</strong> Conducted 300+ interviews to identify key pain points - trust, payment delays, job quality</li>
-                        <li><strong>Content-Led GTM:</strong> Developed organic content strategy targeting blue-collar workers on Instagram</li>
-                        <li><strong>Viral Storytelling:</strong> Created relatable, emotional narratives showing real workers finding better opportunities</li>
-                        <li><strong>B2B Outreach:</strong> Simultaneously pitched enterprise clients (Swiggy, Zepto, Delhivery) for job postings</li>
-                    </ul>
-                </div>
+                    <!-- Execution Card -->
+                    <div class="bento-card bento-large">
+                        <h3>🚀 Execution</h3>
+                        <p>Created a viral video that resonated deeply with the target audience. The video showcased authentic stories of blue-collar workers, positioned Heywork as the trustworthy solution, and included a clear call-to-action. Used AI tools to produce high-quality content quickly, optimized for Instagram Reels algorithm.</p>
+                    </div>
 
-                <div class="case-section">
-                    <h3>🚀 Execution</h3>
-                    <p>Created a viral video that resonated deeply with the target audience. The video showcased authentic stories of blue-collar workers, positioned Heywork as the trustworthy solution, and included a clear call-to-action. Used AI tools to produce high-quality content quickly, optimized for Instagram Reels algorithm.</p>
-                </div>
-
-                <div class="metrics-grid">
-                    <div class="metric-card">
+                    <!-- Metric Cards -->
+                    <div class="bento-card bento-small metric-bento">
                         <span class="metric-value">400</span>
                         <span class="metric-label">Total Users Acquired</span>
                     </div>
-                    <div class="metric-card">
+
+                    <div class="bento-card bento-small metric-bento">
                         <span class="metric-value">300</span>
                         <span class="metric-label">From Single Video</span>
                     </div>
-                    <div class="metric-card">
+
+                    <div class="bento-card bento-small metric-bento">
                         <span class="metric-value">10K+</span>
                         <span class="metric-label">Video Views</span>
                     </div>
-                    <div class="metric-card">
+
+                    <div class="bento-card bento-small metric-bento">
                         <span class="metric-value">2.5%</span>
                         <span class="metric-label">Conversion Rate</span>
                     </div>
-                </div>
 
-                <div class="highlight-box">
-                    <strong>Key Result:</strong> 62% of total user acquisition came from a single viral video, proving strong product-market fit and messaging resonance. Achieved ₹10 CAC through small paid experiment (₹500 → 50 users).
-                </div>
+                    <!-- Strategy Card -->
+                    <div class="bento-card bento-large">
+                        <h3>💡 My Strategy</h3>
+                        <ul>
+                            <li><strong>Positioning:</strong> Conducted 300+ interviews to identify key pain points - trust, payment delays, job quality</li>
+                            <li><strong>Content-Led GTM:</strong> Developed organic content strategy targeting blue-collar workers on Instagram</li>
+                            <li><strong>Viral Storytelling:</strong> Created relatable, emotional narratives showing real workers finding better opportunities</li>
+                            <li><strong>B2B Outreach:</strong> Simultaneously pitched enterprise clients (Swiggy, Zepto, Delhivery) for job postings</li>
+                        </ul>
+                    </div>
 
-                <div class="learnings">
-                    <h4>🎓 Key Learnings</h4>
-                    <ul>
-                        <li>Emotional storytelling beats feature lists for consumer products</li>
-                        <li>Platform algorithms favor authentic, relatable content over polished brand videos</li>
-                        <li>Content that shows transformation drives higher conversion than awareness content</li>
-                        <li>Starting B2B supply-side earlier would have accelerated growth further</li>
-                    </ul>
+                    <!-- Learnings Card -->
+                    <div class="bento-card bento-large bento-learnings">
+                        <h4>🎓 Key Learnings</h4>
+                        <ul>
+                            <li>Emotional storytelling beats feature lists for consumer products</li>
+                            <li>Platform algorithms favor authentic, relatable content over polished brand videos</li>
+                            <li>Content that shows transformation drives higher conversion than awareness content</li>
+                            <li>Starting B2B supply-side earlier would have accelerated growth further</li>
+                        </ul>
+                    </div>
+
+                    <!-- Highlight Card -->
+                    <div class="bento-card bento-wide bento-highlight">
+                        <p><strong>Key Result:</strong> 62% of total user acquisition came from a single viral video, proving strong product-market fit and messaging resonance. Achieved ₹10 CAC through small paid experiment (₹500 → 50 users).</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Case Study 2: Agency Viral Content -->
-            <div class="case-study">
-                <div class="case-study-header">
-                    <h3 class="case-study-title">BConClub: 1M+ Views Through Viral Content</h3>
-                    <div class="case-meta">
-                        <span class="meta-item">⏱ 18 months</span>
-                        <span class="meta-item">🎬 360+ videos</span>
-                        <span class="meta-item">📈 Content Marketing</span>
+            <!-- Separator -->
+            <div class="case-study-separator">
+                <div class="separator-line"></div>
+                <div class="separator-label">Case Study 02</div>
+                <div class="separator-line"></div>
+            </div>
+
+            <!-- Case Study 2: Agency Viral Content - Bento Style -->
+            <div class="case-study-wrapper">
+                <div class="bento-grid">
+                    <!-- Hero Card -->
+                    <div class="bento-card bento-hero">
+                        <h3 class="case-study-title">BConClub: 1M+ Views Through Viral Content</h3>
+                        <div class="case-meta">
+                            <span class="meta-item">⏱ 18 months</span>
+                            <span class="meta-item">🎬 360+ videos</span>
+                            <span class="meta-item">📈 Content Marketing</span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="case-section">
-                    <h3>🎯 The Challenge</h3>
-                    <p>Build brand awareness and credibility for a marketing agency transitioning from traditional motion graphics to AI-powered content creation. Stand out in a crowded market and attract enterprise clients through demonstrated expertise.</p>
-                </div>
+                    <!-- Challenge Card -->
+                    <div class="bento-card bento-large">
+                        <h3>🎯 The Challenge</h3>
+                        <p>Build brand awareness and credibility for a marketing agency transitioning from traditional motion graphics to AI-powered content creation. Stand out in a crowded market and attract enterprise clients through demonstrated expertise.</p>
+                    </div>
 
-                <div class="case-section">
-                    <h3>💡 My Approach</h3>
-                    <ul>
-                        <li><strong>Volume + Quality:</strong> Maintained consistent output of 20-30 videos per month while optimizing for viral performance</li>
-                        <li><strong>Platform Mastery:</strong> Deep-dived into Instagram Reels algorithm - hooks, pacing, music, trends</li>
-                        <li><strong>AI Innovation:</strong> Pioneered agency's transition to AI tools (Nano banana, Veo) to increase production speed 3-5x</li>
-                        <li><strong>Diverse Portfolio:</strong> Created content across industries - FMCG, automotive, lifestyle, food & beverage</li>
-                    </ul>
-                </div>
+                    <!-- Notable Campaigns Card -->
+                    <div class="bento-card bento-large">
+                        <h3>🏆 Notable Campaigns</h3>
+                        <ul>
+                            <li><strong>Viral Hit #1:</strong> 599K views - Brand storytelling video that showcased product in unexpected, engaging way</li>
+                            <li><strong>Parachute Campaign:</strong> 120K views - Transformed commodity product (coconut oil) into aspirational lifestyle content</li>
+                            <li><strong>Consistent Performers:</strong> Multiple videos achieving 10K-15K views with high engagement rates</li>
+                        </ul>
+                    </div>
 
-                <div class="metrics-grid">
-                    <div class="metric-card">
+                    <!-- Metric Cards -->
+                    <div class="bento-card bento-small metric-bento">
                         <span class="metric-value">1M+</span>
                         <span class="metric-label">Cumulative Views</span>
                     </div>
-                    <div class="metric-card">
+
+                    <div class="bento-card bento-small metric-bento">
                         <span class="metric-value">599K</span>
                         <span class="metric-label">Top Video Views</span>
                     </div>
-                    <div class="metric-card">
+
+                    <div class="bento-card bento-small metric-bento">
                         <span class="metric-value">120K</span>
                         <span class="metric-label">Second Top Video</span>
                     </div>
-                    <div class="metric-card">
+
+                    <div class="bento-card bento-small metric-bento">
                         <span class="metric-value">360+</span>
                         <span class="metric-label">Total Videos</span>
                     </div>
-                </div>
 
-                <div class="case-section">
-                    <h3>🏆 Notable Campaigns</h3>
-                    <ul>
-                        <li><strong>Viral Hit #1:</strong> 599K views - Brand storytelling video that showcased product in unexpected, engaging way</li>
-                        <li><strong>Parachute Campaign:</strong> 120K views - Transformed commodity product (coconut oil) into aspirational lifestyle content</li>
-                        <li><strong>Consistent Performers:</strong> Multiple videos achieving 10K-15K views with high engagement rates</li>
-                        <li><strong>Product Showcases:</strong> Created content for automotive (Thar), beverages (Campa Cola), consumer goods</li>
-                    </ul>
-                </div>
+                    <!-- Approach Card -->
+                    <div class="bento-card bento-large">
+                        <h3>💡 My Approach</h3>
+                        <ul>
+                            <li><strong>Volume + Quality:</strong> Maintained consistent output of 20-30 videos per month while optimizing for viral performance</li>
+                            <li><strong>Platform Mastery:</strong> Deep-dived into Instagram Reels algorithm - hooks, pacing, music, trends</li>
+                            <li><strong>AI Innovation:</strong> Pioneered agency's transition to AI tools (Nano banana, Veo) to increase production speed 3-5x</li>
+                            <li><strong>Diverse Portfolio:</strong> Created content across industries - FMCG, automotive, lifestyle, food & beverage</li>
+                        </ul>
+                    </div>
 
-                <div class="highlight-box">
-                    <strong>Impact:</strong> Built agency's social presence from scratch to 1M+ views, establishing credibility that attracted enterprise clients. Proven track record of creating viral content consistently, not just one-off hits.
-                </div>
+                    <!-- Learnings Card -->
+                    <div class="bento-card bento-large bento-learnings">
+                        <h4>🎓 What Makes Content Go Viral</h4>
+                        <ul>
+                            <li>First 3 seconds are everything - must stop the scroll immediately</li>
+                            <li>Authenticity > Production value - real stories beat overly polished content</li>
+                            <li>Platform-specific optimization crucial - what works on Reels won't work on YouTube</li>
+                            <li>Consistent posting builds algorithm favor - can't expect virality from sporadic posts</li>
+                            <li>AI tools enable quality at scale - key competitive advantage going forward</li>
+                        </ul>
+                    </div>
 
-                <div class="learnings">
-                    <h4>🎓 What Makes Content Go Viral</h4>
-                    <ul>
-                        <li>First 3 seconds are everything - must stop the scroll immediately</li>
-                        <li>Authenticity > Production value - real stories beat overly polished content</li>
-                        <li>Platform-specific optimization crucial - what works on Reels won't work on YouTube</li>
-                        <li>Consistent posting builds algorithm favor - can't expect virality from sporadic posts</li>
-                        <li>AI tools enable quality at scale - key competitive advantage going forward</li>
-                    </ul>
+                    <!-- Highlight Card -->
+                    <div class="bento-card bento-wide bento-highlight">
+                        <p><strong>Impact:</strong> Built agency's social presence from scratch to 1M+ views, establishing credibility that attracted enterprise clients. Proven track record of creating viral content consistently, not just one-off hits.</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Case Study 3: Content Production at Scale -->
-            <div class="case-study">
-                <div class="case-study-header">
-                    <h3 class="case-study-title">360+ Videos: Quality at Scale</h3>
-                    <div class="case-meta">
-                        <span class="meta-item">⏱ 18 months</span>
-                        <span class="meta-item">📊 20-30/month</span>
-                        <span class="meta-item">🚀 Growth Marketing</span>
+            <!-- Separator -->
+            <div class="case-study-separator">
+                <div class="separator-line"></div>
+                <div class="separator-label">Case Study 03</div>
+                <div class="separator-line"></div>
+            </div>
+
+            <!-- Case Study 3: Content Production at Scale - Bento Style -->
+            <div class="case-study-wrapper">
+                <div class="bento-grid">
+                    <!-- Hero Card -->
+                    <div class="bento-card bento-hero">
+                        <h3 class="case-study-title">360+ Videos: Quality at Scale</h3>
+                        <div class="case-meta">
+                            <span class="meta-item">⏱ 18 months</span>
+                            <span class="meta-item">📊 20-30/month</span>
+                            <span class="meta-item">🚀 Growth Marketing</span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="case-section">
-                    <h3>🎯 The Challenge</h3>
-                    <p>Maintain consistent high-quality content output while experimenting with formats, styles, and platforms. Scale production without sacrificing creative quality or strategic thinking.</p>
-                </div>
+                    <!-- Challenge Card -->
+                    <div class="bento-card bento-wide">
+                        <h3>🎯 The Challenge</h3>
+                        <p>Maintain consistent high-quality content output while experimenting with formats, styles, and platforms. Scale production without sacrificing creative quality or strategic thinking.</p>
+                    </div>
 
-                <div class="case-section">
-                    <h3>⚙️ My Production System</h3>
-                    <ul>
-                        <li><strong>AI-Powered Workflows:</strong> Integrated AI tools (Nano banana for visuals, Claude for scripts, Veo and Kling for video) to accelerate production 3-5x</li>
-                        <li><strong>Content Frameworks:</strong> Developed repeatable frameworks for different content types (product showcases, brand stories, educational content)</li>
-                        <li><strong>Batch Production:</strong> Organized production in batches - ideation week, production week, publishing throughout month</li>
-                        <li><strong>Performance Analysis:</strong> Weekly reviews of top/bottom performers to identify patterns and continuously improve</li>
-                    </ul>
-                </div>
-
-                <div class="metrics-grid">
-                    <div class="metric-card">
+                    <!-- Metric Cards -->
+                    <div class="bento-card bento-small metric-bento">
                         <span class="metric-value">360+</span>
                         <span class="metric-label">Videos Produced</span>
                     </div>
-                    <div class="metric-card">
+
+                    <div class="bento-card bento-small metric-bento">
                         <span class="metric-value">20-30</span>
                         <span class="metric-label">Videos per Month</span>
                     </div>
-                    <div class="metric-card">
+
+                    <div class="bento-card bento-small metric-bento">
                         <span class="metric-value">10+</span>
                         <span class="metric-label">Brands Served</span>
                     </div>
-                    <div class="metric-card">
+
+                    <div class="bento-card bento-small metric-bento">
                         <span class="metric-value">3-5x</span>
                         <span class="metric-label">Speed Increase via AI</span>
                     </div>
-                </div>
 
-                <div class="highlight-box">
-                    <strong>Key Innovation:</strong> Pioneered agency's AI transformation, enabling them to compete with larger agencies on speed and scale while maintaining creative quality. This became a key differentiator in winning new business.
+                    <!-- Production System Card -->
+                    <div class="bento-card bento-wide">
+                        <h3>⚙️ My Production System</h3>
+                        <ul>
+                            <li><strong>AI-Powered Workflows:</strong> Integrated AI tools (Nano banana for visuals, Claude for scripts, Veo and Kling for video) to accelerate production 3-5x</li>
+                            <li><strong>Content Frameworks:</strong> Developed repeatable frameworks for different content types (product showcases, brand stories, educational content)</li>
+                            <li><strong>Batch Production:</strong> Organized production in batches - ideation week, production week, publishing throughout month</li>
+                            <li><strong>Performance Analysis:</strong> Weekly reviews of top/bottom performers to identify patterns and continuously improve</li>
+                        </ul>
+                    </div>
+
+                    <!-- Highlight Card -->
+                    <div class="bento-card bento-wide bento-highlight">
+                        <p><strong>Key Innovation:</strong> Pioneered agency's AI transformation, enabling them to compete with larger agencies on speed and scale while maintaining creative quality. This became a key differentiator in winning new business.</p>
+                    </div>
                 </div>
             </div>
 
@@ -897,18 +1377,6 @@
                         <span class="skill-tag">Growth Metrics</span>
                         <span class="skill-tag">A/B Testing</span>
                         <span class="skill-tag">GTM Strategy</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>💻 Technical</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">B.Tech CS</span>
-                        <span class="skill-tag">Product Thinking</span>
-                        <span class="skill-tag">Platform Algorithms</span>
-                        <span class="skill-tag">AI/ML Basics</span>
-                        <span class="skill-tag">Analytics Tools</span>
-                        <span class="skill-tag">Prompt Engineering</span>
                     </div>
                 </div>
             </div>
